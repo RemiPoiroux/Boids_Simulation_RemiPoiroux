@@ -4,6 +4,43 @@
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest/doctest.h"
 
+class Boids
+{
+    glm::vec2 position;
+    float maxSpeed;
+    float speed;
+    float angle;
+
+    Boids(glm::vec2 p, float mS, float a): position(p), maxSpeed(mS), speed(mS), angle(a) {};
+};
+
+std::vector<glm::vec2> createBoids(const p6::Context& ctx, const size_t nb)
+{
+    std::vector<glm::vec2> points;
+    for(size_t i=0; i<nb; ++i)
+    {
+        points.push_back(p6::random::point(ctx));
+    }
+    return points;
+}
+
+void boidsDisplacement(/*const p6::Context& ctx,*/ std::vector<glm::vec2>& boids)
+{
+    for(size_t i=0; i<boids.size(); ++i)
+    {
+        float speed=0.001;
+        boids[i]+=speed;
+    }
+}
+
+void drawBoids(p6::Context& ctx, const std::vector<glm::vec2>& boids)
+{
+    for(auto boid : boids)
+    {
+        ctx.circle(p6::Center{boid},p6::Radius{0.02f});
+    }
+}
+
 int main(int argc, char* argv[])
 {
     { // Run the tests
@@ -16,33 +53,19 @@ int main(int argc, char* argv[])
     }
 
     // Actual app
-    auto ctx = p6::Context{{.title = "Simple-p6-Setup"}};
+    auto ctx = p6::Context{{.title = "Rem's boids"}};
     ctx.maximize_window();
 
-    size_t nb_square=100;
-    std::vector<glm::vec2> points;
-    for(size_t i=0; i<nb_square; ++i)
-    {
-        points.push_back(p6::random::point(ctx));
-    }
+    std::vector<glm::vec2> boids=createBoids(ctx,100);
 
     // Declare your infinite update loop.
     ctx.update = [&]() {
-        ctx.background(p6::NamedColor::Blue);
-        ctx.circle(
-            p6::Center{ctx.mouse()},
-            p6::Radius{0.1f}
-        );
-        for(size_t i=0; i<points.size(); ++i)
-        {
-            ctx.square(
-                p6::Center{points[i]},
-                p6::Radius{0.02f}
-            );
 
-            float speed=0.01;
-            points[i]+=speed;
-        }
+        ctx.background(p6::NamedColor::Cyan);
+
+        boidsDisplacement(/*ctx,*/ boids);
+
+        drawBoids(ctx, boids);
     };
 
     // Should be done last. It starts the infinite loop.
