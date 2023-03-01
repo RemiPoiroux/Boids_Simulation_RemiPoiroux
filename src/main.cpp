@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <cstdlib>
 #include "p6/p6.h"
 #define DOCTEST_CONFIG_IMPLEMENT
@@ -20,7 +21,7 @@ int main(int argc, char* argv[])
 
     size_t nb_square=100;
     std::vector<glm::vec2> points;
-    for(int i=0; i<nb_square; ++i)
+    for(size_t i=0; i<nb_square; ++i)
     {
         points.push_back(p6::random::point(ctx));
     }
@@ -32,7 +33,7 @@ int main(int argc, char* argv[])
             p6::Center{ctx.mouse()},
             p6::Radius{0.1f}
         );
-        for(int i=0; i<points.size(); ++i)
+        for(size_t i=0; i<points.size(); ++i)
         {
             ctx.square(
                 p6::Center{points[i]},

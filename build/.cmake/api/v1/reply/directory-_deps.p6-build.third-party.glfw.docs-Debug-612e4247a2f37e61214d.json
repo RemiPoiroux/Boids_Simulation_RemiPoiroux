@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "_deps/p6-build/third-party/glfw/docs",
+		"source" : "build/_deps/p6-src/third-party/glfw/docs"
+	}
+}

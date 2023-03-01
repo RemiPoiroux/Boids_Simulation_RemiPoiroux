@@ -1,0 +1,432 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "_deps/doctest-build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.doctest-build-Debug-0078a94366d031358198.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "build/_deps/doctest-src",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "_deps/p6-build",
+					"childIndexes" : 
+					[
+						3,
+						7,
+						8,
+						9,
+						10,
+						13
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build-Debug-619d85d8e5c283b08bfd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src",
+					"targetIndexes" : 
+					[
+						10
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended",
+					"childIndexes" : 
+					[
+						4,
+						5
+					],
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended-Debug-453f2ad19a71f8e808ab.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/glpp-extended",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glpp",
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glpp-Debug-5976d29457b66765a057.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/glpp-extended/lib/glpp",
+					"targetIndexes" : 
+					[
+						5,
+						7
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glm",
+					"childIndexes" : 
+					[
+						6
+					],
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glm-Debug-a919750b0a65d1c0cf14.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "build/_deps/p6-src/third-party/glpp-extended/lib/glm",
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glpp-extended/lib/glm/glm",
+					"jsonFile" : "directory-_deps.p6-build.third-party.glpp-extended.lib.glm.glm-Debug-2fc9e47ba0bb558c2ea9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 2,
+					"source" : "build/_deps/p6-src/third-party/glpp-extended/lib/glm/glm"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/img",
+					"jsonFile" : "directory-_deps.p6-build.third-party.img-Debug-2eaba834d808b08285db.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/img",
+					"targetIndexes" : 
+					[
+						9,
+						11
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/op",
+					"jsonFile" : "directory-_deps.p6-build.third-party.op-Debug-aa67f4cced3fc18c8c92.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/op"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/exe_path",
+					"jsonFile" : "directory-_deps.p6-build.third-party.exe_path-Debug-3585fe49789b00714f95.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/exe_path",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glfw",
+					"childIndexes" : 
+					[
+						11,
+						12
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build.third-party.glfw-Debug-9c41b1f4e0b6defc7b86.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 3,
+					"source" : "build/_deps/p6-src/third-party/glfw"
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glfw/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-_deps.p6-build.third-party.glfw.src-Debug-b18733208c9ed556da89.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 3,
+					"source" : "build/_deps/p6-src/third-party/glfw/src",
+					"targetIndexes" : 
+					[
+						6,
+						13
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/glfw/docs",
+					"jsonFile" : "directory-_deps.p6-build.third-party.glfw.docs-Debug-612e4247a2f37e61214d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 10,
+					"projectIndex" : 3,
+					"source" : "build/_deps/p6-src/third-party/glfw/docs",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "_deps/p6-build/third-party/imgui",
+					"jsonFile" : "directory-_deps.p6-build.third-party.imgui-Debug-e247946610b3a9661e4a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "build/_deps/p6-src/third-party/imgui",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2,
+						3,
+						4,
+						7,
+						8,
+						9,
+						13
+					],
+					"name" : "Simple-p6-Setup",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						4,
+						5,
+						7,
+						8,
+						9,
+						10,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "doctest",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5,
+						6
+					],
+					"name" : "glm",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						10,
+						11,
+						12
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						6,
+						13
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 13,
+					"id" : "ImGui::@a12a9c37a98fee5b7977",
+					"jsonFile" : "target-ImGui-Debug-2480b92ca6ad051d7ef4.json",
+					"name" : "ImGui",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Simple-p6-Setup::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Simple-p6-Setup-Debug-2c098a74f29d5021ceff.json",
+					"name" : "Simple-p6-Setup",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "docs::@5d3ce723ea1f6cee74c1",
+					"jsonFile" : "target-docs-Debug-38a499019c7551d2c5a7.json",
+					"name" : "docs",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "doctest_with_main::@de8c2d1415f8a28c2e63",
+					"jsonFile" : "target-doctest_with_main-Debug-a8d962104f808e05f771.json",
+					"name" : "doctest_with_main",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "exe_path::@a63eedd348096de52d98",
+					"jsonFile" : "target-exe_path-Debug-d7856d87822d79a3d6a5.json",
+					"name" : "exe_path",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glad::@e5d7c760eca4eac2409f",
+					"jsonFile" : "target-glad-Debug-1237906ebea22d3c4047.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "glfw::@562e2781b72b6260148b",
+					"jsonFile" : "target-glfw-Debug-5b33debe437ff96c64f0.json",
+					"name" : "glfw",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glpp::@e5d7c760eca4eac2409f",
+					"jsonFile" : "target-glpp-Debug-ed7bd7647b0f309daa5e.json",
+					"name" : "glpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "glpp-extended::@4e084f835e3ce032d937",
+					"jsonFile" : "target-glpp-extended-Debug-f5dfe79b78f3dbf1ae59.json",
+					"name" : "glpp-extended",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "img::@36c20e18dd9565886a38",
+					"jsonFile" : "target-img-Debug-73be8199d17f7ff8c343.json",
+					"name" : "img",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "p6::@858a43b5fb96714b8280",
+					"jsonFile" : "target-p6-Debug-d06272e133bf84c05737.json",
+					"name" : "p6",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "stb_image::@36c20e18dd9565886a38",
+					"jsonFile" : "target-stb_image-Debug-5e41f9163b95abbdab32.json",
+					"name" : "stb_image",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "uninstall::@cc21d235872243a76bd4",
+					"jsonFile" : "target-uninstall-Debug-205ddaac483b0914463b.json",
+					"name" : "uninstall",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "update_mappings::@562e2781b72b6260148b",
+					"jsonFile" : "target-update_mappings-Debug-2892c4721eed8f1c22d1.json",
+					"name" : "update_mappings",
+					"projectIndex" : 3
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build",
+		"source" : "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}
