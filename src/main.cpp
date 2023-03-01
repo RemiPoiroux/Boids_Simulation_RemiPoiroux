@@ -18,13 +18,30 @@ int main(int argc, char* argv[])
     auto ctx = p6::Context{{.title = "Simple-p6-Setup"}};
     ctx.maximize_window();
 
+    size_t nb_square=100;
+    std::vector<glm::vec2> points;
+    for(int i=0; i<nb_square; ++i)
+    {
+        points.push_back(p6::random::point(ctx));
+    }
+
     // Declare your infinite update loop.
     ctx.update = [&]() {
         ctx.background(p6::NamedColor::Blue);
         ctx.circle(
             p6::Center{ctx.mouse()},
-            p6::Radius{0.2f}
+            p6::Radius{0.1f}
         );
+        for(int i=0; i<points.size(); ++i)
+        {
+            ctx.square(
+                p6::Center{points[i]},
+                p6::Radius{0.02f}
+            );
+
+            float speed=0.01;
+            points[i]+=speed;
+        }
     };
 
     // Should be done last. It starts the infinite loop.
