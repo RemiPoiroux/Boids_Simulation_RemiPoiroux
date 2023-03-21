@@ -10,10 +10,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.26.0-rc4/CMakeSystem.cmake"
   "CMakeLists.txt"
   "p6-populate-prefix/tmp/p6-populate-mkdirs.cmake"
-  "/usr/local/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake"
   "/usr/local/share/cmake-3.26/Modules/CMakeGenericSystem.cmake"
   "/usr/local/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake"
-  "/usr/local/share/cmake-3.26/Modules/CMakeSystem.cmake.in"
   "/usr/local/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake"
   "/usr/local/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake"
   "/usr/local/share/cmake-3.26/Modules/ExternalProject.cmake"
@@ -34,7 +32,6 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/3.26.0-rc4/CMakeSystem.cmake"
   "p6-populate-prefix/tmp/p6-populate-mkdirs.cmake"
   "p6-populate-prefix/tmp/p6-populate-gitclone.cmake"
   "p6-populate-prefix/src/p6-populate-stamp/p6-populate-gitinfo.txt"

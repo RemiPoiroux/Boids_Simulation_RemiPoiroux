@@ -4,40 +4,147 @@
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest/doctest.h"
 
-class Boids
+
+/////////////////////////////////
+    // PARAMETERS
+
+const int NB_BOIDS=100;
+const float BOIDS_LENGHT=0.02;
+
+const float ACCELERATION=0.01;
+const float MAX_SPEED_MIN=0.0005;
+const float MAX_SPEED_MAX=0.001;
+
+const float RALENTIR_LUGAR=0.2;
+
+const float NEIGHBOR_INFLUENCE=0.5;
+
+
+/////////////////////////////////
+
+class Boid
 {
+    public :
     glm::vec2 position;
     float maxSpeed;
-    float speed;
-    float angle;
+    glm::vec2 speed;
+    glm::vec2 direction;
 
-    Boids(glm::vec2 p, float mS, float a): position(p), maxSpeed(mS), speed(mS), angle(a) {};
+    Boid(glm::vec2 p, float mS, glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
 };
 
-std::vector<glm::vec2> createBoids(const p6::Context& ctx, const size_t nb)
+float RandomFloat(float a, float b) 
 {
-    std::vector<glm::vec2> points;
-    for(size_t i=0; i<nb; ++i)
-    {
-        points.push_back(p6::random::point(ctx));
-    }
-    return points;
+    float random = ((float)rand()) / (float)RAND_MAX;
+    float diff   = b - a;
+    float r      = random * diff;
+    return a + r;
 }
 
-void boidsDisplacement(/*const p6::Context& ctx,*/ std::vector<glm::vec2>& boids)
+std::vector<Boid> createBoids(const p6::Context& ctx, const size_t nb)
+{
+    std::vector<Boid> boids;
+    for(size_t i=0; i<nb; ++i)
+    {
+        glm::vec2 position=p6::random::point(ctx);
+        float maxSpeed = RandomFloat(MAX_SPEED_MIN, MAX_SPEED_MAX);
+        glm::vec2 direction = p6::random::direction();
+
+        Boid boid=Boid(position, maxSpeed, direction);
+        boids.push_back(boid);
+    }
+    return boids;
+}
+
+void neighborsManager(std::vector<Boid>& boids)
 {
     for(size_t i=0; i<boids.size(); ++i)
     {
-        float speed=0.001;
-        boids[i]+=speed;
+        size_t neighborIndex=i;
+        float neighborDistance=1000000; 
+
+        for(size_t j=0; j<boids.size(); ++j)
+        {
+            if(j!=i)
+            {
+                float distance=sqrt(pow(boids[i].position.x-boids[j].position.x, 2)+pow(boids[i].position.y-boids[j].position.y, 2));
+
+                if(distance<neighborDistance)
+                {
+                    neighborIndex=j;
+                    neighborDistance=distance;
+                }
+            }
+        }
+        boids[i].direction+=(boids[neighborIndex].direction-boids[i].direction)*NEIGHBOR_INFLUENCE;
     }
 }
 
-void drawBoids(p6::Context& ctx, const std::vector<glm::vec2>& boids)
+void turnManager(const p6::Context& ctx ,std::vector<Boid>& boids)
 {
-    for(auto boid : boids)
+    for(Boid & boid : boids)
     {
-        ctx.circle(p6::Center{boid},p6::Radius{0.02f});
+
+        if((boid.position.x>ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
+        {
+            boid.speed.x=boid.maxSpeed*pow(((1-(boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6);
+        }
+        else if((boid.position.x<-ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
+        {
+            boid.speed.x=boid.maxSpeed*pow(((1-(-boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6);
+        }
+
+        if((boid.position.y>(1-RALENTIR_LUGAR)))
+        {
+            boid.speed.y=boid.maxSpeed*pow(((1-(boid.position.y-(1-RALENTIR_LUGAR)))), 6);
+        }
+        else if((boid.position.y<-(1-RALENTIR_LUGAR)))
+        {
+            boid.speed.y=boid.maxSpeed*pow(((1-(-boid.position.y-(1-RALENTIR_LUGAR)))), 6);
+        }
+    }
+}
+
+void borderManager(const p6::Context& ctx ,std::vector<Boid>& boids)
+{
+    for(Boid & boid : boids)
+    {
+        if(boid.position.x+boid.direction.x*boid.speed.x>ctx.aspect_ratio() 
+        || boid.position.x+boid.direction.x*boid.speed.x<-ctx.aspect_ratio())
+        {
+            boid.direction.x=-boid.direction.x;
+        }
+        if(boid.position.y+boid.direction.y*boid.speed.y>1 
+        || boid.position.y+boid.direction.y*boid.speed.y<-1)
+        {
+            boid.direction.y=-boid.direction.y;
+        }
+    }
+}
+
+void boidsDisplacement(std::vector<Boid>& boids)
+{
+    for(Boid & boid : boids)
+    {
+        if(boid.speed.x<boid.maxSpeed)
+        {
+            boid.speed.x+=ACCELERATION*boid.maxSpeed;
+        }
+        if(boid.speed.y<boid.maxSpeed)
+        {
+            boid.speed.y+=ACCELERATION*boid.maxSpeed;
+        }
+
+        boid.position.x+=boid.direction.x*boid.speed.x;
+        boid.position.y+=boid.direction.y*boid.speed.y;
+    }
+}
+
+void drawBoids(p6::Context& ctx, const std::vector<Boid>& boids)
+{
+    for(Boid boid : boids)
+    {
+        ctx.circle(p6::Center{boid.position},p6::Radius{BOIDS_LENGHT});
     }
 }
 
@@ -56,14 +163,19 @@ int main(int argc, char* argv[])
     auto ctx = p6::Context{{.title = "Rem's boids"}};
     ctx.maximize_window();
 
-    std::vector<glm::vec2> boids=createBoids(ctx,100);
+    std::vector<Boid> boids=createBoids(ctx,NB_BOIDS);
 
     // Declare your infinite update loop.
     ctx.update = [&]() {
 
         ctx.background(p6::NamedColor::Cyan);
 
-        boidsDisplacement(/*ctx,*/ boids);
+        neighborsManager(boids);
+
+        turnManager(ctx, boids);
+        borderManager(ctx, boids);
+
+        boidsDisplacement(boids);
 
         drawBoids(ctx, boids);
     };
