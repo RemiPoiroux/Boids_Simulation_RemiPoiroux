@@ -8,16 +8,18 @@
 /////////////////////////////////
     // PARAMETERS
 
-const int NB_BOIDS=100;
+const int NB_BOIDS=200;
 const float BOIDS_LENGHT=0.02;
+const float TAIL_SIZE=20;
 
 const float ACCELERATION=0.01;
-const float MAX_SPEED_MIN=0.0005;
-const float MAX_SPEED_MAX=0.001;
+const float MAX_SPEED_MIN=0.003;
+const float MAX_SPEED_MAX=0.004;
+const float MIN_SPEED=0.0008;
 
 const float RALENTIR_LUGAR=0.2;
 
-const float NEIGHBOR_INFLUENCE=0.5;
+const float NEIGHBOR_INFLUENCE=0.1;
 
 
 /////////////////////////////////
@@ -33,12 +35,19 @@ class Boid
     Boid(glm::vec2 p, float mS, glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
 };
 
-float RandomFloat(float a, float b) 
+float RandomFloat(const float a, const float b) 
 {
     float random = ((float)rand()) / (float)RAND_MAX;
     float diff   = b - a;
     float r      = random * diff;
     return a + r;
+}
+
+void normaliseVector(glm::vec2 &v)
+{
+    float norm = std::sqrt(v.x*v.x + v.y*v.y);
+    v.x=v.x/norm;
+    v.y=v.y/norm;
 }
 
 std::vector<Boid> createBoids(const p6::Context& ctx, const size_t nb)
@@ -76,7 +85,8 @@ void neighborsManager(std::vector<Boid>& boids)
                 }
             }
         }
-        boids[i].direction+=(boids[neighborIndex].direction-boids[i].direction)*NEIGHBOR_INFLUENCE;
+        boids[i].direction+=((boids[neighborIndex].direction-boids[i].direction))*NEIGHBOR_INFLUENCE;
+        normaliseVector(boids[i].direction);
     }
 }
 
@@ -87,20 +97,20 @@ void turnManager(const p6::Context& ctx ,std::vector<Boid>& boids)
 
         if((boid.position.x>ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
         {
-            boid.speed.x=boid.maxSpeed*pow(((1-(boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6);
+            boid.speed.x=boid.maxSpeed*pow(((1-(boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6)+MIN_SPEED;
         }
         else if((boid.position.x<-ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
         {
-            boid.speed.x=boid.maxSpeed*pow(((1-(-boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6);
+            boid.speed.x=boid.maxSpeed*pow(((1-(-boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6)+MIN_SPEED;
         }
 
         if((boid.position.y>(1-RALENTIR_LUGAR)))
         {
-            boid.speed.y=boid.maxSpeed*pow(((1-(boid.position.y-(1-RALENTIR_LUGAR)))), 6);
+            boid.speed.y=boid.maxSpeed*pow(((1-(boid.position.y-(1-RALENTIR_LUGAR)))), 6)+MIN_SPEED;
         }
         else if((boid.position.y<-(1-RALENTIR_LUGAR)))
         {
-            boid.speed.y=boid.maxSpeed*pow(((1-(-boid.position.y-(1-RALENTIR_LUGAR)))), 6);
+            boid.speed.y=boid.maxSpeed*pow(((1-(-boid.position.y-(1-RALENTIR_LUGAR)))), 6)+MIN_SPEED;
         }
     }
 }
@@ -144,6 +154,7 @@ void drawBoids(p6::Context& ctx, const std::vector<Boid>& boids)
 {
     for(Boid boid : boids)
     {
+        ctx.fill={-boid.direction.y-boid.direction.x,boid.direction.y,boid.direction.x,1};
         ctx.circle(p6::Center{boid.position},p6::Radius{BOIDS_LENGHT});
     }
 }
@@ -162,13 +173,15 @@ int main(int argc, char* argv[])
     // Actual app
     auto ctx = p6::Context{{.title = "Rem's boids"}};
     ctx.maximize_window();
+    ctx.stroke_weight=0;
 
     std::vector<Boid> boids=createBoids(ctx,NB_BOIDS);
 
     // Declare your infinite update loop.
     ctx.update = [&]() {
 
-        ctx.background(p6::NamedColor::Cyan);
+        ctx.fill={0,0,0,1/TAIL_SIZE};
+        ctx.rectangle(p6::FullScreen{});
 
         neighborsManager(boids);
 
