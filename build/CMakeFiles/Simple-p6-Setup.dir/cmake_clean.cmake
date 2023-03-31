@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o"
+  "CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o.d"
   "CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o"
   "CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o.d"
+  "CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o"
+  "CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o.d"
   "CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o"
   "CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o.d"
   "Simple-p6-Setup"

@@ -15,25 +15,18 @@ const float TAIL_SIZE=20;
 const float ACCELERATION=0.01;
 const float MAX_SPEED_MIN=0.003;
 const float MAX_SPEED_MAX=0.004;
-const float MIN_SPEED=0.0008;
+const float MIN_SPEED=0.001;
 
 const float RALENTIR_LUGAR=0.2;
 
-const float NEIGHBOR_INFLUENCE=0.1;
+const float NEIGHBOR_ATTRACTION_DISTANCE=0.2;
+const float NEIGHBOR_ATTRACTION_STRENGTH=0.05;
+
+const float NEIGHBOR_SEPARATION_DISTANCE=0.05;
+const float NEIGHBOR_SEPARATION_STRENGTH=0.5;
 
 
 /////////////////////////////////
-
-class Boid
-{
-    public :
-    glm::vec2 position;
-    float maxSpeed;
-    glm::vec2 speed;
-    glm::vec2 direction;
-
-    Boid(glm::vec2 p, float mS, glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
-};
 
 float RandomFloat(const float a, const float b) 
 {
@@ -50,17 +43,78 @@ void normaliseVector(glm::vec2 &v)
     v.y=v.y/norm;
 }
 
+class Boid
+{
+    public :
+        glm::vec2 position;
+        float maxSpeed;
+        glm::vec2 speed;
+        glm::vec2 direction;
+
+    public :
+
+        Boid(glm::vec2 p, float mS, glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
+
+        void acceleration()
+        {
+            if(this->speed.x<this->maxSpeed)
+            {
+                this->speed.x+=ACCELERATION*this->maxSpeed;
+            }
+            if(this->speed.y<this->maxSpeed)
+            {
+                this->speed.y+=ACCELERATION*this->maxSpeed;
+            }
+        }
+        void displacement()
+        {
+            this->position.x+=this->direction.x*this->speed.x;
+            this->position.y+=this->direction.y*this->speed.y;
+        }
+
+        void neighborsAttraction(const Boid boid)
+        {
+            float distance=sqrt(pow(this->position.x-boid.position.x, 2)+pow(this->position.y-boid.position.y, 2));
+
+            if(distance<NEIGHBOR_ATTRACTION_DISTANCE)
+            {
+                this->direction+=((boid.direction-this->direction))*NEIGHBOR_ATTRACTION_STRENGTH;
+                normaliseVector(this->direction);
+            }
+        }
+        void neighborsSeparation(const Boid boid)
+        {
+            float distance=sqrt(pow(this->position.x-boid.position.x, 2)+pow(this->position.y-boid.position.y, 2));
+
+            if(distance<NEIGHBOR_SEPARATION_DISTANCE)
+            {
+                this->direction-=((boid.direction-this->direction))*NEIGHBOR_SEPARATION_STRENGTH;
+                normaliseVector(this->direction);
+            }
+        }
+
+        void draw(p6::Context& ctx)
+        {
+            ctx.fill={-this->direction.y-this->direction.x,this->direction.y,this->direction.x,1};
+            ctx.circle(p6::Center{this->position},p6::Radius{BOIDS_LENGHT});
+        }
+};
+
+Boid randomBoid(const p6::Context& ctx)
+{
+    glm::vec2 position=p6::random::point(ctx);
+    float maxSpeed = RandomFloat(MAX_SPEED_MIN, MAX_SPEED_MAX);
+    glm::vec2 direction = p6::random::direction();
+
+    return Boid(position, maxSpeed, direction);
+}
+
 std::vector<Boid> createBoids(const p6::Context& ctx, const size_t nb)
 {
     std::vector<Boid> boids;
     for(size_t i=0; i<nb; ++i)
     {
-        glm::vec2 position=p6::random::point(ctx);
-        float maxSpeed = RandomFloat(MAX_SPEED_MIN, MAX_SPEED_MAX);
-        glm::vec2 direction = p6::random::direction();
-
-        Boid boid=Boid(position, maxSpeed, direction);
-        boids.push_back(boid);
+        boids.push_back(randomBoid(ctx));
     }
     return boids;
 }
@@ -69,24 +123,14 @@ void neighborsManager(std::vector<Boid>& boids)
 {
     for(size_t i=0; i<boids.size(); ++i)
     {
-        size_t neighborIndex=i;
-        float neighborDistance=1000000; 
-
         for(size_t j=0; j<boids.size(); ++j)
         {
             if(j!=i)
             {
-                float distance=sqrt(pow(boids[i].position.x-boids[j].position.x, 2)+pow(boids[i].position.y-boids[j].position.y, 2));
-
-                if(distance<neighborDistance)
-                {
-                    neighborIndex=j;
-                    neighborDistance=distance;
-                }
+                boids[i].neighborsAttraction(boids[j]);
+                boids[i].neighborsSeparation(boids[j]);
             }
-        }
-        boids[i].direction+=((boids[neighborIndex].direction-boids[i].direction))*NEIGHBOR_INFLUENCE;
-        normaliseVector(boids[i].direction);
+        }    
     }
 }
 
@@ -114,7 +158,6 @@ void turnManager(const p6::Context& ctx ,std::vector<Boid>& boids)
         }
     }
 }
-
 void borderManager(const p6::Context& ctx ,std::vector<Boid>& boids)
 {
     for(Boid & boid : boids)
@@ -135,18 +178,9 @@ void borderManager(const p6::Context& ctx ,std::vector<Boid>& boids)
 void boidsDisplacement(std::vector<Boid>& boids)
 {
     for(Boid & boid : boids)
-    {
-        if(boid.speed.x<boid.maxSpeed)
-        {
-            boid.speed.x+=ACCELERATION*boid.maxSpeed;
-        }
-        if(boid.speed.y<boid.maxSpeed)
-        {
-            boid.speed.y+=ACCELERATION*boid.maxSpeed;
-        }
-
-        boid.position.x+=boid.direction.x*boid.speed.x;
-        boid.position.y+=boid.direction.y*boid.speed.y;
+    {   
+        boid.acceleration();
+        boid.displacement();
     }
 }
 
@@ -154,8 +188,7 @@ void drawBoids(p6::Context& ctx, const std::vector<Boid>& boids)
 {
     for(Boid boid : boids)
     {
-        ctx.fill={-boid.direction.y-boid.direction.x,boid.direction.y,boid.direction.x,1};
-        ctx.circle(p6::Center{boid.position},p6::Radius{BOIDS_LENGHT});
+        boid.draw(ctx);
     }
 }
 
