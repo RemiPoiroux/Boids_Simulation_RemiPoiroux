@@ -64,9 +64,7 @@ endif()
 # SOURCE_FILES at CMakeLists.txt:8 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/*")
 set(OLD_GLOB
-  "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/guirlande.cpp"
   "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/main.cpp"
-  "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/psyche.cpp"
   "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/tests.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

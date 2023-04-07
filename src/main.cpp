@@ -1,5 +1,7 @@
 #include <cstddef>
 #include <cstdlib>
+#include "glm/fwd.hpp"
+#include "glm/gtx/norm.hpp"
 #include "p6/p6.h"
 #define DOCTEST_CONFIG_IMPLEMENT
 #include "doctest/doctest.h"
@@ -15,15 +17,18 @@ const float TAIL_SIZE=20;
 const float ACCELERATION=0.01;
 const float MAX_SPEED_MIN=0.003;
 const float MAX_SPEED_MAX=0.004;
-const float MIN_SPEED=0.001;
 
 const float RALENTIR_LUGAR=0.2;
+const float BORDER_STRENGTH=0.5;
 
-const float NEIGHBOR_ATTRACTION_DISTANCE=0.2;
-const float NEIGHBOR_ATTRACTION_STRENGTH=0.05;
+const float NEIGHBOR_ALIGNMENT_DISTANCE=0.4;
+const float NEIGHBOR_ALIGNMENT_STRENGTH=0.005;
 
-const float NEIGHBOR_SEPARATION_DISTANCE=0.05;
-const float NEIGHBOR_SEPARATION_STRENGTH=0.5;
+const float NEIGHBOR_COHESION_DISTANCE=0.3;
+const float NEIGHBOR_COHESION_STRENGTH=0.002;
+
+const float NEIGHBOR_SEPARATION_DISTANCE=0.1;
+const float NEIGHBOR_SEPARATION_STRENGTH=0.05;
 
 
 /////////////////////////////////
@@ -38,58 +43,140 @@ float RandomFloat(const float a, const float b)
 
 void normaliseVector(glm::vec2 &v)
 {
-    float norm = std::sqrt(v.x*v.x + v.y*v.y);
+    float norm = sqrt(v.x*v.x+v.y*v.y);
     v.x=v.x/norm;
     v.y=v.y/norm;
 }
 
 class Boid
 {
-    public :
+    private :
         glm::vec2 position;
         float maxSpeed;
-        glm::vec2 speed;
+        float speed;
         glm::vec2 direction;
+
+    private : 
+        void applyForce(const glm::vec2 direction, const float strength)
+        {
+            this->direction+=direction*strength;
+            normaliseVector(this->direction);
+        }
+
+        float distance(const Boid boid) const
+        {
+            return sqrt(pow(this->position.x-boid.position.x, 2)+pow(this->position.y-boid.position.y, 2));
+        }
+
+        void slowing(const float amount)
+        {
+            this->speed-=this->speed*amount;
+        }
 
     public :
 
-        Boid(glm::vec2 p, float mS, glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
+        Boid(const glm::vec2 p, const float mS, const glm::vec2 d): position(p), maxSpeed(mS), speed(), direction(d) {};
 
         void acceleration()
         {
-            if(this->speed.x<this->maxSpeed)
+            if(this->speed<this->maxSpeed)
             {
-                this->speed.x+=ACCELERATION*this->maxSpeed;
-            }
-            if(this->speed.y<this->maxSpeed)
-            {
-                this->speed.y+=ACCELERATION*this->maxSpeed;
+                this->speed+=ACCELERATION*this->maxSpeed;
             }
         }
         void displacement()
         {
-            this->position.x+=this->direction.x*this->speed.x;
-            this->position.y+=this->direction.y*this->speed.y;
+            this->position+=this->direction*this->speed;
         }
 
-        void neighborsAttraction(const Boid boid)
+        void neighborsAlignement(const Boid boid)
         {
-            float distance=sqrt(pow(this->position.x-boid.position.x, 2)+pow(this->position.y-boid.position.y, 2));
-
-            if(distance<NEIGHBOR_ATTRACTION_DISTANCE)
+            if(this->distance(boid)<NEIGHBOR_ALIGNMENT_DISTANCE)
             {
-                this->direction+=((boid.direction-this->direction))*NEIGHBOR_ATTRACTION_STRENGTH;
-                normaliseVector(this->direction);
+                this->applyForce(boid.direction-this->direction,NEIGHBOR_ALIGNMENT_STRENGTH);
+            }
+        }
+        void neighborsCohesion(const Boid boid)
+        {
+            if(this->distance(boid)<NEIGHBOR_COHESION_DISTANCE)
+            {
+                this->applyForce(boid.position-this->position,NEIGHBOR_COHESION_STRENGTH);
             }
         }
         void neighborsSeparation(const Boid boid)
         {
-            float distance=sqrt(pow(this->position.x-boid.position.x, 2)+pow(this->position.y-boid.position.y, 2));
-
-            if(distance<NEIGHBOR_SEPARATION_DISTANCE)
+            if(this->distance(boid)<NEIGHBOR_SEPARATION_DISTANCE)
             {
                 this->direction-=((boid.direction-this->direction))*NEIGHBOR_SEPARATION_STRENGTH;
-                normaliseVector(this->direction);
+            }
+        }
+
+        void bordersAvoidance(const p6::Context& ctx)
+        {
+            if((this->position.x>ctx.aspect_ratio()*(1-RALENTIR_LUGAR)) 
+            && this->direction.x>0)
+            {
+                if(this->position.x>ctx.aspect_ratio())
+                {
+                    glm::vec2 direction(-1,-this->direction.y);
+                    this->applyForce(direction, 2);
+                }
+                else
+                {
+                    glm::vec2 direction(-1,this->direction.y);
+                    float strength=(RALENTIR_LUGAR+this->position.x/ctx.aspect_ratio()-1)*BORDER_STRENGTH;
+                    this->applyForce(direction,strength);
+                    this->slowing(strength);
+                }
+            }
+            else if((this->position.x<-ctx.aspect_ratio()*(1-RALENTIR_LUGAR))
+            && this->direction.x<0)
+            {
+                if(this->position.x<-ctx.aspect_ratio())
+                {
+                    glm::vec2 direction(1,-this->direction.y);
+                    this->applyForce(direction, 2);
+                }
+                else
+                {
+                    glm::vec2 direction(1,this->direction.y);
+                    float strength=(RALENTIR_LUGAR-this->position.x/ctx.aspect_ratio()-1)*BORDER_STRENGTH;
+                    this->applyForce(direction,strength);
+                    this->slowing(strength);
+                }
+            }
+
+            if((this->position.y>(1-RALENTIR_LUGAR)) 
+            && this->direction.y>0)
+            {
+                if(this->position.y>1)
+                {
+                    glm::vec2 direction(-this->direction.y, -1);
+                    this->applyForce(direction, 2);
+                }
+                else
+                {
+                    glm::vec2 direction(this->direction.x,-1);
+                    float strength=(RALENTIR_LUGAR+this->position.y-1)*BORDER_STRENGTH;
+                    this->applyForce(direction,strength);
+                    this->slowing(strength);
+                }
+            }
+            else if((this->position.y<-(1-RALENTIR_LUGAR))
+            && this->direction.y<0)
+            {
+                if(this->position.y<-1)
+                {
+                    glm::vec2 direction(-this->direction.x, 1);
+                    this->applyForce(direction, 2);
+                }
+                else
+                {
+                    glm::vec2 direction(this->direction.x,1);
+                    float strength=(RALENTIR_LUGAR-this->position.y-1)*BORDER_STRENGTH;
+                    this->applyForce(direction,strength);
+                    this->slowing(strength);
+                }
             }
         }
 
@@ -127,51 +214,19 @@ void neighborsManager(std::vector<Boid>& boids)
         {
             if(j!=i)
             {
-                boids[i].neighborsAttraction(boids[j]);
+                boids[i].neighborsAlignement(boids[j]);
+                boids[i].neighborsCohesion(boids[j]);
                 boids[i].neighborsSeparation(boids[j]);
             }
         }    
     }
 }
 
-void turnManager(const p6::Context& ctx ,std::vector<Boid>& boids)
-{
-    for(Boid & boid : boids)
-    {
-
-        if((boid.position.x>ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
-        {
-            boid.speed.x=boid.maxSpeed*pow(((1-(boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6)+MIN_SPEED;
-        }
-        else if((boid.position.x<-ctx.aspect_ratio()*(1-RALENTIR_LUGAR)))
-        {
-            boid.speed.x=boid.maxSpeed*pow(((1-(-boid.position.x-(1-RALENTIR_LUGAR)*ctx.aspect_ratio()))), 6)+MIN_SPEED;
-        }
-
-        if((boid.position.y>(1-RALENTIR_LUGAR)))
-        {
-            boid.speed.y=boid.maxSpeed*pow(((1-(boid.position.y-(1-RALENTIR_LUGAR)))), 6)+MIN_SPEED;
-        }
-        else if((boid.position.y<-(1-RALENTIR_LUGAR)))
-        {
-            boid.speed.y=boid.maxSpeed*pow(((1-(-boid.position.y-(1-RALENTIR_LUGAR)))), 6)+MIN_SPEED;
-        }
-    }
-}
 void borderManager(const p6::Context& ctx ,std::vector<Boid>& boids)
 {
     for(Boid & boid : boids)
     {
-        if(boid.position.x+boid.direction.x*boid.speed.x>ctx.aspect_ratio() 
-        || boid.position.x+boid.direction.x*boid.speed.x<-ctx.aspect_ratio())
-        {
-            boid.direction.x=-boid.direction.x;
-        }
-        if(boid.position.y+boid.direction.y*boid.speed.y>1 
-        || boid.position.y+boid.direction.y*boid.speed.y<-1)
-        {
-            boid.direction.y=-boid.direction.y;
-        }
+        boid.bordersAvoidance(ctx);
     }
 }
 
@@ -218,7 +273,6 @@ int main(int argc, char* argv[])
 
         neighborsManager(boids);
 
-        turnManager(ctx, boids);
         borderManager(ctx, boids);
 
         boidsDisplacement(boids);

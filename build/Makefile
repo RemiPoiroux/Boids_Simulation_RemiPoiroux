@@ -344,30 +344,6 @@ ImGui/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/p6-build/third-party/imgui/CMakeFiles/ImGui.dir/build.make _deps/p6-build/third-party/imgui/CMakeFiles/ImGui.dir/build
 .PHONY : ImGui/fast
 
-src/guirlande.o: src/guirlande.cpp.o
-.PHONY : src/guirlande.o
-
-# target to build an object file
-src/guirlande.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o
-.PHONY : src/guirlande.cpp.o
-
-src/guirlande.i: src/guirlande.cpp.i
-.PHONY : src/guirlande.i
-
-# target to preprocess a source file
-src/guirlande.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.i
-.PHONY : src/guirlande.cpp.i
-
-src/guirlande.s: src/guirlande.cpp.s
-.PHONY : src/guirlande.s
-
-# target to generate assembly for a file
-src/guirlande.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.s
-.PHONY : src/guirlande.cpp.s
-
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -391,30 +367,6 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
-
-src/psyche.o: src/psyche.cpp.o
-.PHONY : src/psyche.o
-
-# target to build an object file
-src/psyche.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o
-.PHONY : src/psyche.cpp.o
-
-src/psyche.i: src/psyche.cpp.i
-.PHONY : src/psyche.i
-
-# target to preprocess a source file
-src/psyche.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.i
-.PHONY : src/psyche.cpp.i
-
-src/psyche.s: src/psyche.cpp.s
-.PHONY : src/psyche.s
-
-# target to generate assembly for a file
-src/psyche.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Simple-p6-Setup.dir/build.make CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.s
-.PHONY : src/psyche.cpp.s
 
 src/tests.o: src/tests.cpp.o
 .PHONY : src/tests.o
@@ -466,15 +418,9 @@ help:
 	@echo "... img"
 	@echo "... p6"
 	@echo "... stb_image"
-	@echo "... src/guirlande.o"
-	@echo "... src/guirlande.i"
-	@echo "... src/guirlande.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/psyche.o"
-	@echo "... src/psyche.i"
-	@echo "... src/psyche.s"
 	@echo "... src/tests.o"
 	@echo "... src/tests.i"
 	@echo "... src/tests.s"

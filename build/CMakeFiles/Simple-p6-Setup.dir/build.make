@@ -69,24 +69,10 @@ include CMakeFiles/Simple-p6-Setup.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Simple-p6-Setup.dir/flags.make
 
-CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o: CMakeFiles/Simple-p6-Setup.dir/flags.make
-CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o: /home/rempoir/Documents/IMAC/Annee2/Semestre\ 2/Programmation/Simple-p6-Setup/src/guirlande.cpp
-CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o: CMakeFiles/Simple-p6-Setup.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o -MF CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o.d -o CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o -c "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/guirlande.cpp"
-
-CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/guirlande.cpp" > CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.i
-
-CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/guirlande.cpp" -o CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.s
-
 CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o: CMakeFiles/Simple-p6-Setup.dir/flags.make
 CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o: /home/rempoir/Documents/IMAC/Annee2/Semestre\ 2/Programmation/Simple-p6-Setup/src/main.cpp
 CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o: CMakeFiles/Simple-p6-Setup.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o -MF CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o.d -o CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o -c "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/main.cpp"
 
 CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.i: cmake_force
@@ -97,24 +83,10 @@ CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/main.cpp" -o CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.s
 
-CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o: CMakeFiles/Simple-p6-Setup.dir/flags.make
-CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o: /home/rempoir/Documents/IMAC/Annee2/Semestre\ 2/Programmation/Simple-p6-Setup/src/psyche.cpp
-CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o: CMakeFiles/Simple-p6-Setup.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o -MF CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o.d -o CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o -c "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/psyche.cpp"
-
-CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/psyche.cpp" > CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.i
-
-CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/psyche.cpp" -o CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.s
-
 CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o: CMakeFiles/Simple-p6-Setup.dir/flags.make
 CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o: /home/rempoir/Documents/IMAC/Annee2/Semestre\ 2/Programmation/Simple-p6-Setup/src/tests.cpp
 CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o: CMakeFiles/Simple-p6-Setup.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o -MF CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o.d -o CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o -c "/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/src/tests.cpp"
 
 CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.i: cmake_force
@@ -127,17 +99,13 @@ CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.s: cmake_force
 
 # Object files for target Simple-p6-Setup
 Simple__p6__Setup_OBJECTS = \
-"CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o" \
 "CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o" \
-"CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o" \
 "CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o"
 
 # External object files for target Simple-p6-Setup
 Simple__p6__Setup_EXTERNAL_OBJECTS =
 
-Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/src/guirlande.cpp.o
 Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/src/main.cpp.o
-Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/src/psyche.cpp.o
 Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/src/tests.cpp.o
 Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/build.make
 Simple-p6-Setup: _deps/p6-build/libp6.a
@@ -152,7 +120,7 @@ Simple-p6-Setup: _deps/p6-build/third-party/glfw/src/libglfw3.a
 Simple-p6-Setup: /usr/lib/x86_64-linux-gnu/librt.so
 Simple-p6-Setup: /usr/lib/x86_64-linux-gnu/libm.so
 Simple-p6-Setup: CMakeFiles/Simple-p6-Setup.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Simple-p6-Setup"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/rempoir/Documents/IMAC/Annee2/Semestre 2/Programmation/Simple-p6-Setup/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Simple-p6-Setup"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Simple-p6-Setup.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
