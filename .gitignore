@@ -33,5 +33,4 @@ build/
 *.exe
 *.out
 *.app
-build
 .cache
