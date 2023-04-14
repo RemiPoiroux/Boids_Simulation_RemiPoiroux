@@ -59,6 +59,7 @@ void Boid::neighborsSeparation(const Boid boid, const float distance, const floa
     if(this->distance(boid)<distance)
     {
         this->applyForce(boid.direction-this->direction,-strength);
+        this->applyForce(boid.position-this->position,-strength/10);
     }
 }
 

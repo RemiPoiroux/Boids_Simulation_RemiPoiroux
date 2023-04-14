@@ -46,11 +46,11 @@ int main(int argc, char* argv[])
         ImGui::Begin("Control");
         ImGui::SliderFloat("Boids size", &BOIDS_SIZE, 0.01f, 1.f);
         ImGui::SliderFloat("Tails size", &TAILS_SIZE, 1.f, 10000.f);
-        ImGui::SliderFloat("Alignment distance", &NEIGHBORS_PARAMETERS[0], 0.f, 1.f);
+        ImGui::SliderFloat("Alignment distance", &NEIGHBORS_PARAMETERS[0], 0.f, 2.f);
         ImGui::SliderFloat("Alignment strength", &NEIGHBORS_PARAMETERS[1], 0.f, 1.f);
-        ImGui::SliderFloat("Cohesion distance", &NEIGHBORS_PARAMETERS[2], 0.f, 1.f);
+        ImGui::SliderFloat("Cohesion distance", &NEIGHBORS_PARAMETERS[2], 0.f, 2.f);
         ImGui::SliderFloat("Cohesion strength", &NEIGHBORS_PARAMETERS[3], 0.f, 1.f);
-        ImGui::SliderFloat("Separation distance", &NEIGHBORS_PARAMETERS[4], 0.f, 1.f);
+        ImGui::SliderFloat("Separation distance", &NEIGHBORS_PARAMETERS[4], 0.f, 2.f);
         ImGui::SliderFloat("Separation strength", &NEIGHBORS_PARAMETERS[5], 0.f, 1.f);
         ImGui::SliderFloat("Borders distance", &BORDERS_DISTANCE, 0.f, 1.f);
         ImGui::SliderFloat("Borders strength", &BORDERS_STRENGTH, 0.f, 1.f);
