@@ -103,7 +103,7 @@ void Boid::bordersAvoidance(const p6::Context& ctx, const float distance, float 
     {
         if(this->position.y>1)
         {
-            glm::vec2 direction(-this->direction.y, -1);
+            glm::vec2 direction(-this->direction.x, -1);
             this->applyForce(direction, 2);
         }
         else
